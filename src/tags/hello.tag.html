@@ -1,0 +1,13 @@
+<x-hello message={}>
+  <!-- Note: Only the attributes defined above should be observed -->
+  <span>{opts.message}</span>
+  <style>
+    :scope {
+      color: red;
+    }
+    /* doesn't work? */
+  </style>
+  <script>
+    console.log(this); // => undefined. maybe BUG!
+  </script>
+</x-hello>

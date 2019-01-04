@@ -1,0 +1,29 @@
+{
+  "engines": {
+    "node": ">=6",
+    "npm": ">=3"
+  },
+  "license": "MIT",
+  "name": "riot-web-components",
+  "scripts": {
+    "start": "webpack-dev-server"
+  },
+  "version": "0.1.0",
+  "description": "",
+  "dependencies": {
+    "riot-compiler": "^3.5.2"
+  },
+  "private": true,
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@riotjs/custom-elements": "^0.1.0",
+    "babel-loader": "^8.0.4",
+    "cheerio": "^1.0.0-rc.2",
+    "loader-utils": "^1.2.3",
+    "riot": "^3.13.2",
+    "riot-tag-loader": "^2.1.0",
+    "webpack": "^4.28.3",
+    "webpack-cli": "^3.2.0",
+    "webpack-dev-server": "^3.1.14"
+  }
+}
