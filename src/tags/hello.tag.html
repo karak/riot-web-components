@@ -2,10 +2,10 @@
   <!-- Note: Only the attributes defined above should be observed -->
   <span>{opts.message}</span>
   <style>
-    :scope {
+    :host {
       color: red;
     }
-    /* doesn't work? */
+    /* `:host` instead of `:scope` is required when shadow DOM */
   </style>
   <script>
     console.log(this); // => undefined. maybe BUG!
