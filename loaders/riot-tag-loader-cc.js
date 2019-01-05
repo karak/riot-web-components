@@ -1,4 +1,11 @@
-const compiler = require("riot-compiler");
+const compiler = require("@riotjs/compiler");
+/* EXPERIMENTAL:
+ * Adopting riot-compiler v4
+ * Issues:
+ * 1. It provide only async `compile`. Can we use it in loader?
+ * 2. No `entities` options and lacks `attribs` field.
+  *   => Can riot-parser solve this?
+ */
 const { getOptions } = require("loader-utils");
 const parseAttributes = require("./parseAttributes");
 const escapeJs = require("./escapeJs");
@@ -23,7 +30,7 @@ function hotReload(tags) {
   }`;
 }
 
-module.exports = function(source) {
+module.exports = async function(source) {
   // tags collection
   const tags = [];
 
@@ -38,14 +45,14 @@ module.exports = function(source) {
 
   // compile to generate entities
   const parts =
-    compiler.compile(
+    await compiler.compile(
       source,
       Object.assign(opts, {
         sourcemap: false,
-        entities: true
-      }),
-      this.resourcePath
-    ) || [];
+        entities: true,
+        file: this.resourcePath
+      })
+    );
 
   const defines = parts.map(function(part) {
     const imports = part.imports,
