@@ -1,4 +1,5 @@
-const riotParser = require("@riotjs/parser").default;
+const { compile } = require("@riotjs/compiler");
+
 /* EXPERIMENTAL:
  * Adopting riot-compiler v4
  * Issues:
@@ -30,26 +31,6 @@ function hotReload(tags) {
   }`;
 }
 
-/**
- * transform the script written in riot@v4 form to IIFE.
- *
- * @param {String} javascript - code
- */
-function transformScript(javascript) {
-  let found = false;
-  const replaced = javascript.replace(/export\s+default/, () => {
-    found = true;
-    return 'var __default =';
-  });
-
-  return `(function () {
-  ${replaced}
-  ${found ? 'return __default;' : ''}
-} ())`;
-
-  // TODO: sourcemap?
-}
-
 module.exports = function(source) {
   // tags collection
   const tags = [];
@@ -63,48 +44,20 @@ module.exports = function(source) {
     return acc;
   }, {});
 
-  // compile to generate entities
-  const { parse } = riotParser(opts.parserOpts || {});
-  const parseResult = parse(source);
-  const { template, css, javascript } = parseResult.output;
-
-  console.log(css);
-  const tagName = template.name;
-  const html = printAst(parseResult.data, template.nodes);
-  const style = css ? css.text.text : '';
-  const props = template.attributes.map(x => x.name);
-  const data = template.attributes.reduce((acc, x) => { acc[x.name] = x.isBoolean? !!x.value : x.value; return acc; }, {})
-  const api = transformScript(javascript.text.text);
-
-  const output = `
-import define from '@riotjs/custom-elements';
-
-var component = {
-  css: '${escapeJs(style)}',
-  tmpl: '${escapeJs(html)}',
-  props: ['${props.map(escapeJs).join('\',\'')}'],
-  data() {
-    return ${JSON.stringify(data)};
-  }
-};
-
-var api = ${api};
-
-Object.assign(component, api);
-
-define('${tagName}', component);
-
-${opts.hot ? hotReload(tags) : ""}
-`;
-
   // cache this module
   if (this.cacheable) this.cacheable();
 
-  // TODO: generate sourcemaps
+  const callback = this.async();
+  (async () => {
+    try {
+      // compile to generate entities
+      let { code, map} = await compile(source, opts);
 
-  console.log('$$$$$----------=$$$$')
-  console.log(output);
+      code += opts.hot ? hotReload(tags) : '';
 
-  return output;
-  //this.callback(output);
+      callback(null, code, map);
+    } catch (err) {
+      callback(err);
+    }
+  })();
 };

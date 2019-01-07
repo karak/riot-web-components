@@ -1,4 +1,8 @@
-import './tags/hello.riot';
+import define from '@riotjs/custom-elements';
+import wrap from "./wrap";
+import hello from './tags/hello.riot';
+
+define('x-hello', wrap(hello));
 
 document.addEventListener('DOMContentLoaded', function () {
   // Change the message after 2s has passed.

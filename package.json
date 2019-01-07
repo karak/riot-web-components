@@ -14,8 +14,8 @@
   "private": true,
   "devDependencies": {
     "@babel/core": "^7.2.2",
+    "@riotjs/compiler": "^4.0.0-alpha.6",
     "@riotjs/custom-elements": "^0.1.0",
-    "@riotjs/parser": "^0.8.1",
     "babel-loader": "^8.0.4",
     "loader-utils": "^1.2.3",
     "riot": "^3.13.2",
