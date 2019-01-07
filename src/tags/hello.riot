@@ -1,6 +1,8 @@
-<x-hello message={}>
+<x-hello message="">
   <!-- Note: Only the attributes defined above should be observed -->
-  <span>{opts.message}</span>
+  <span>
+    {opts.message}
+  </span>
   <style>
     :host {
       color: red;
@@ -8,6 +10,10 @@
     /* doesn't work? */
   </style>
   <script>
-    console.log(this); // => undefined. maybe BUG!
+    export default {
+      onMounted() {
+        console.log(this);
+      }
+    }
   </script>
 </x-hello>
