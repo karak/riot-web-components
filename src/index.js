@@ -1,4 +1,4 @@
-import './tags/hello.tag.html';
+import './tags/hello.riot';
 
 document.addEventListener('DOMContentLoaded', function () {
   // Change the message after 2s has passed.
