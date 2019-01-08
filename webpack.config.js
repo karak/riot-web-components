@@ -16,7 +16,14 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.riot$/, loader: 'riot-tag-loader-cc', enforce: 'pre', options: { hot: true } },
+      {
+        test: /\.riot$/,
+        use: [
+          { loader: 'riot-hot-loader' },
+          { loader: 'riot-tag-loader-cc', options: { hot: true } }
+        ],
+        enforce: 'pre'
+      },
       { test: /\.js$/, exclude: /node_modules/, use: 'babel-loader'}
     ]
   }
