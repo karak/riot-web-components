@@ -1,12 +1,5 @@
 const { compile } = require("@riotjs/compiler");
 
-/* EXPERIMENTAL:
- * Adopting riot-compiler v4
- * Issues:
- * 1. It provide only async `compile`. Can we use it in loader?
- * 2. No `entities` options and lacks `attribs` field.
-  *   => Can riot-parser solve this?
- */
 const { getOptions } = require("loader-utils");
 
 /**
@@ -45,17 +38,12 @@ module.exports = function(source) {
   // cache this module
   if (this.cacheable) this.cacheable();
 
+  // compile to generate entities
   const callback = this.async();
-  (async () => {
-    try {
-      // compile to generate entities
-      let { code, map} = await compile(source, opts);
-
-      code += opts.hot ? hotReload(tags) : '';
-
-      callback(null, code, map);
-    } catch (err) {
-      callback(err);
-    }
-  })();
+  compile(source, opts).then(({ code, map }) => {
+    code += opts.hot ? hotReload(tags) : '';
+    callback(null, code, map);
+  }).catch(err => {
+    callback(err);
+  });
 };
