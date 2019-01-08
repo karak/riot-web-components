@@ -4,7 +4,7 @@ import {
   bindingTypes
 } from "@riotjs/dom-bindings";
 
-import { startSync } from "optsUtil";
+import { startSync } from "./optsUtil";
 
 /**
  * Create the style node to inject into the shadow DOM
