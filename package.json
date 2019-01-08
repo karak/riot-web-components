@@ -6,7 +6,7 @@
   "license": "MIT",
   "name": "riot-web-components",
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server --hot --inline"
   },
   "version": "0.1.0",
   "description": "",
