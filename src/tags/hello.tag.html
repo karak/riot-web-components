@@ -1,13 +1,22 @@
 <x-hello message={}>
   <!-- Note: Only the attributes defined above should be observed -->
-  <span>{opts.message}</span>
+  <span class={clicked: isClicked} >{opts.message}</span>
+  <p>
+    <button onclick={onClick}>Push me!</button>
+  </p>
   <style>
+    /* `:host` instead of `:scope` is required when shadow DOM */
     :host {
       color: red;
     }
-    /* `:host` instead of `:scope` is required when shadow DOM */
+    .clicked {
+      font-weight: bold;
+    }
   </style>
   <script>
-    console.log(this); // => undefined. maybe BUG!
+    this.isClicked = false;
+    onClick(){
+      this.isClicked = true;
+    }
   </script>
 </x-hello>
