@@ -1,5 +1,13 @@
 
 const WHITE_ATTRIBUTES = ["id", "class", "style", "is"];
+const EVENT_LISTENER_ATTRIBUTES_REGEX = /^on/;
+
+/** @param {String} localName name of attribute without namespace */
+function isWhite(localName) {
+  localName = localName.toLowerCase();
+  return WHITE_ATTRIBUTES.indexOf(localName) >= 0 ||
+    localName.match(EVENT_LISTENER_ATTRIBUTES_REGEX);
+}
 
 /**
  * create initial `opts` from current attributes of an element.
@@ -10,7 +18,7 @@ function createInitialOpts(attributes) {
   const opts = {};
   for (let i = 0; i < attributes.length; i += 1) {
     const attr = attributes.item(i);
-    if (WHITE_ATTRIBUTES.indexOf(attr.localName) < 0) {
+    if (!isWhite(attr.localName)) {
       opts[attr.localName] = attr.value;
     }
   }
@@ -30,7 +38,7 @@ function observeAttributes(el, tagInstance, scope) {
     mutations.forEach(mutation => {
       switch (mutation.type) {
         case "attributes":
-          if (WHITE_ATTRIBUTES.indexOf(mutation.attributeName) < 0) {
+          if (!isWhite(mutation.attributeName)) {
             scope.opts[mutation.attributeName] =
               mutation.target.attributes[mutation.attributeName].nodeValue;
           }
