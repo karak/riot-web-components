@@ -59,7 +59,10 @@ module.exports = function(source) {
 
     return `
 ${imports}
-${js}
+
+const constructor = function () {
+${js};
+};
 
 define('${tagName}', {
   css: '${css}',
@@ -68,7 +71,7 @@ define('${tagName}', {
   data() {
     return ${data};
   }
-})`;
+}, constructor)`;
   });
 
   // generate the output code

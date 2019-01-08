@@ -13,7 +13,7 @@
   "private": true,
   "devDependencies": {
     "@babel/core": "^7.2.2",
-    "@riotjs/custom-elements": "^0.1.0",
+    "@riotjs/custom-elements": "github:karak/riot-custom-elements",
     "babel-loader": "^8.0.4",
     "cheerio": "^1.0.0-rc.2",
     "loader-utils": "^1.2.3",
