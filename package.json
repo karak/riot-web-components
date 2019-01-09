@@ -18,7 +18,7 @@
     "babel-loader": "^8.0.4",
     "loader-utils": "^1.2.3",
     "riot": "github:riot/riot#next",
-    "riot-compiler-loader": "github:karak/riot-compiler-loader",
+    "riot-compiler-loader": "^0.1.0",
     "webpack": "^4.28.3",
     "webpack-cli": "^3.2.0",
     "webpack-dev-server": "^3.1.14"
