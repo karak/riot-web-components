@@ -1,4 +1,4 @@
-<x-hello message={}>
+<x-hello message="">
   <!-- Note: Only the attributes defined above should be observed -->
   <span class={clicked: isClicked} >{opts.message}</span>
   <p>
@@ -6,6 +6,7 @@
   </p>
   <style>
     /* `:host` instead of `:scope` is required when shadow DOM */
+  <style>
     :host {
       color: red;
     }
@@ -14,9 +15,14 @@
     }
   </style>
   <script>
-    this.isClicked = false;
-    onClick(){
-      this.isClicked = true;
+    export default {
+      clicked: false,
+      onMounted() {
+        console.log(this);
+      },
+      onClick(){
+        this.isClicked = true;
+      }
     }
   </script>
 </x-hello>

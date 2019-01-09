@@ -13,13 +13,11 @@
   "private": true,
   "devDependencies": {
     "@babel/core": "^7.2.2",
-    "@riotjs/custom-elements": "^0.1.0",
+    "@riotjs/compiler": "^4.0.0-alpha.6",
+    "@riotjs/dom-bindings": "^0.8.0",
     "babel-loader": "^8.0.4",
-    "cheerio": "^1.0.0-rc.2",
     "loader-utils": "^1.2.3",
-    "riot": "^3.13.2",
-    "riot-compiler": "^3.5.3",
-    "riot-tag-loader": "^2.1.0",
+    "riot": "github:riot/riot#next",
     "webpack": "^4.28.3",
     "webpack-cli": "^3.2.0",
     "webpack-dev-server": "^3.1.14"
