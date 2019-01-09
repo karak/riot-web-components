@@ -1,0 +1,20 @@
+<kebab-case-test>
+  <span>
+    {opts.textContent}
+  </span>
+  <style>
+    :host {
+      display: none;
+    }
+  </style>
+  <script>
+    import assert from "assert"
+
+    export default {
+      onMounted() {
+        assert(this.root.host.attributes["text-content"].nodeValue === this.opts.textContent);
+        assert(this.root.querySelector("span").textContent === this.opts.textContent);
+      }
+    }
+  </script>
+</kebab-case-test>
