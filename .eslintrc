@@ -1,0 +1,17 @@
+{
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2015,
+    "sourceType": "module"
+  },
+  "extends": [
+    "plugin:prettier/recommended"
+  ],
+  "plugins": [
+    "prettier"
+  ]
+}

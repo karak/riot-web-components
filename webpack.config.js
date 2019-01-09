@@ -13,8 +13,13 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.riot$/, loader: 'riot-compiler-loader', enforce: 'pre', options: { hot: true } },
-      { test: /\.js$/, exclude: /node_modules/, use: 'babel-loader'}
+      {
+        test: /\.riot$/,
+        loader: 'riot-compiler-loader',
+        enforce: 'pre',
+        options: { hot: true }
+      },
+      { test: /\.js$/, exclude: /node_modules/, use: 'babel-loader' }
     ]
   }
 };

@@ -1,12 +1,14 @@
-import kebabCase from "kebab-case";
-const WHITE_ATTRIBUTES = ["id", "class", "style", "is"];
+import kebabCase from 'kebab-case';
+const WHITE_ATTRIBUTES = ['id', 'class', 'style', 'is'];
 const EVENT_LISTENER_ATTRIBUTES_REGEX = /^on/;
 
 /** @param {String} localName name of attribute without namespace */
 function isWhite(localName) {
   localName = localName.toLowerCase();
-  return WHITE_ATTRIBUTES.indexOf(localName) >= 0 ||
-    localName.match(EVENT_LISTENER_ATTRIBUTES_REGEX);
+  return (
+    WHITE_ATTRIBUTES.indexOf(localName) >= 0 ||
+    localName.match(EVENT_LISTENER_ATTRIBUTES_REGEX)
+  );
 }
 
 /**
@@ -41,7 +43,7 @@ export function observeAttributes(el, callback) {
     mutations.forEach(mutation => {
       const { type, attributeName } = mutation;
       switch (type) {
-        case "attributes":
+        case 'attributes':
           if (!isWhite(attributeName)) {
             const optName = kebabCase.reverse(attributeName);
             newProps[optName] =
