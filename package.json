@@ -6,6 +6,9 @@
   "license": "MIT",
   "name": "riot-web-components",
   "scripts": {
+    "lint": "eslint --fix ./*.js ./src/**/*.js",
+    "pretest": "npm run lint",
+    "test": "exit 0",
     "start": "webpack-dev-server"
   },
   "version": "0.1.0",
@@ -16,7 +19,11 @@
     "@riotjs/compiler": "^4.0.0-alpha.6",
     "@riotjs/dom-bindings": "^0.8.0",
     "babel-loader": "^8.0.4",
+    "eslint": "^5.12.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-prettier": "^3.0.1",
     "loader-utils": "^1.2.3",
+    "prettier": "^1.15.3",
     "riot": "github:riot/riot#next",
     "riot-compiler-loader": "^0.1.0",
     "webpack": "^4.28.3",
