@@ -13,8 +13,9 @@ function isWhite(localName) {
  * create initial `opts` from current attributes of an element.
  *
  * @param {NamedNodeMap} attributes
+ * @returns {Object} mapped opts
  */
-function createInitialOpts(attributes) {
+export function createInitialOpts(attributes) {
   const opts = {};
   for (let i = 0; i < attributes.length; i += 1) {
     const attr = attributes.item(i);
@@ -29,37 +30,28 @@ function createInitialOpts(attributes) {
  * start to observe attributes to sync opts with them.
  *
  * @param {HTMLElement} el - element to observe
- * @param {TagInstance} tagInstance - tag instance to sync
- * @param {Object} scope - binding scope
+ * @param {Function} calllback - callback
  * @returns {Function} disconnect function
  */
-function observeAttributes(el, tagInstance, scope) {
+export function observeAttributes(el, callback) {
+  const newProps = {};
   const observer = new MutationObserver(mutations => {
     mutations.forEach(mutation => {
       switch (mutation.type) {
         case "attributes":
           if (!isWhite(mutation.attributeName)) {
-            scope.opts[mutation.attributeName] =
+            newProps[mutation.attributeName] =
               mutation.target.attributes[mutation.attributeName].nodeValue;
           }
           break;
       }
     });
-    tagInstance.update(scope);
+    callback(newProps);
   });
 
   observer.observe(el, { attributes: true });
 
   return () => observer.disconnect();
-}
-
-export function startSync(scope, el, t) {
-  // initialize opts from attributes,
-  scope.opts = createInitialOpts(el.attributes);
-
-  // and observe later change.
-  const stopObserve = observeAttributes(el, t, scope);
-  return stopObserve;
 }
 
 // TODO: Convert camel case - snake case
