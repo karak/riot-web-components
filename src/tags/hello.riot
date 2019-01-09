@@ -1,11 +1,11 @@
 <x-hello message="">
   <!-- Note: Only the attributes defined above should be observed -->
-  <span class={clicked: isClicked} >{opts.message}</span>
+  <span class={this.isClicked ? 'clicked' : ''} onclick={onClicked}>
+    {opts.message}
+  </span>
   <p>
     <button onclick={onClick}>Push me!</button>
   </p>
-  <style>
-    /* `:host` instead of `:scope` is required when shadow DOM */
   <style>
     :host {
       color: red;
@@ -13,14 +13,16 @@
     .clicked {
       font-weight: bold;
     }
+    /* doesn't work? */
   </style>
   <script>
     export default {
-      clicked: false,
+      isClicked: false,
       onMounted() {
         console.log(this);
       },
-      onClick(){
+      onClick() {
+        // BUG! this is not tag instance but an HTML element.
         this.isClicked = true;
       }
     }
