@@ -1,10 +1,13 @@
 <x-hello message="">
   <!-- Note: Only the attributes defined above should be observed -->
-  <span class={this.isClicked ? 'clicked' : ''} onclick={onClicked}>
+  <span class={isClicked ? 'clicked' : ''} onclick={onClicked}>
     {opts.message}
   </span>
   <p>
     <button onclick={onClick}>Push me!</button>
+  </p>
+  <p>
+    <x-inner></x-inner>
   </p>
   <style>
     :host {
@@ -16,7 +19,10 @@
     /* doesn't work? */
   </style>
   <script>
-    export default {
+    import * as riotScoped from '../riot-scoped';
+    import inner from './inner.riot';
+
+    export default riotScoped.register('x-inner', inner)({
       isClicked: false,
       onMounted() {
         console.log(this);
@@ -25,6 +31,6 @@
         // BUG! this is not tag instance but an HTML element.
         this.isClicked = true;
       }
-    }
+    });
   </script>
 </x-hello>
