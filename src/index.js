@@ -1,4 +1,4 @@
-import wrap from "./wrap";
+import wrap from "./riot-web-component-wrapper";
 import hello from "./tags/hello.riot";
 
 customElements.define("x-hello", wrap(hello));
