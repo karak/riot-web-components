@@ -11,12 +11,9 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'dist')
   },
-  resolveLoader: {
-    modules: ['node_modules', path.join(__dirname, 'loaders')]
-  },
   module: {
     rules: [
-      { test: /\.riot$/, loader: 'riot-tag-loader-cc', enforce: 'pre', options: { hot: true } },
+      { test: /\.riot$/, loader: 'riot-compiler-loader', enforce: 'pre', options: { hot: true } },
       { test: /\.js$/, exclude: /node_modules/, use: 'babel-loader'}
     ]
   }
