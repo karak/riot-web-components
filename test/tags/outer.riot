@@ -1,0 +1,13 @@
+<outer>
+  <p>
+    <inner>
+    </inner>
+  </p>
+  <script>
+    import * as riotScoped from '../../src/riot-scoped';
+    import inner from './inner.riot';
+
+    export default riotScoped.register('inner', inner)({
+    });
+  </script>
+</outer>

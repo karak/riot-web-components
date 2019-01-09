@@ -6,9 +6,6 @@
   <p>
     <button onclick="{onClick}">Push me!</button>
   </p>
-  <p>
-    <x-inner></x-inner>
-  </p>
   <style>
     :host {
       color: red;
@@ -19,10 +16,7 @@
     /* doesn't work? */
   </style>
   <script>
-    import * as riotScoped from '../riot-scoped';
-    import inner from './inner.riot';
-
-    export default riotScoped.register('x-inner', inner)({
+    export default {
       isClicked: false,
       onMounted() {
         console.log(this);
@@ -31,6 +25,6 @@
         // BUG! this is not tag instance but an HTML element.
         this.isClicked = true;
       }
-    });
+    };
   </script>
 </x-hello>

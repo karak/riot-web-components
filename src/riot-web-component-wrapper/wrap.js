@@ -1,4 +1,4 @@
-import { component as defineRiotComponent } from 'riot';
+import { defineComponent } from '../riot-v4';
 import { createInitialOpts, observeAttributes } from './optsUtil';
 
 /**
@@ -28,11 +28,8 @@ export default function wrap(tagModule) {
       super(...args);
 
       // create anonymous component
-      const { css, template, tag } = tagImplementation;
-      this._tag = defineRiotComponent(Object.assign({ css, template }, tag), {
-        slots: undefined,
-        attributes: {}
-      });
+      const { css } = tagImplementation;
+      this._tag = defineComponent(tagImplementation);
 
       // TODO: expose some methods in _tag definitions
 
