@@ -15,7 +15,7 @@ function decorate(tag, methods) {
       if (onBeforeUnmount1) onBeforeUnmount1.apply(this, arguments);
       if (onBeforeUnmount0) onBeforeUnmount0.apply(this, arguments);
     }
-  })
+  });
 }
 
 /**
@@ -41,7 +41,6 @@ function executeForEach(context, selector, callback) {
 }
 
 function makeRegistry(selector, tagImplementation, accumMakeMethods) {
-
   /**
    * make lifecycle methods mixin
    * @param {Array} tags tag storage
@@ -49,27 +48,31 @@ function makeRegistry(selector, tagImplementation, accumMakeMethods) {
    */
   function makeMethods(tags) {
     return {
-      onMounted: function () {
-        const newTags = executeForEach.apply(this, [this.root, selector, mountBy(tagImplementation)]);
+      onMounted: function() {
+        const newTags = executeForEach.apply(this, [
+          this.root,
+          selector,
+          mountBy(tagImplementation)
+        ]);
         tags.push(...newTags);
       },
-      onBeforeUnmount: function () {
+      onBeforeUnmount: function() {
         tags.forEach(x => x.unmount());
       }
     };
   }
 
-  const nextAccumMakeMethods = function (tags) {
-    return decorate(accumMakeMethods(tags), makeMethods(tags))
-  }
+  const nextAccumMakeMethods = function(tags) {
+    return decorate(accumMakeMethods(tags), makeMethods(tags));
+  };
 
   const registry = function(parentTagImplementation) {
     return decorate(parentTagImplementation, nextAccumMakeMethods([]));
-  }
+  };
 
   registry.register = function(selector, tagImplementation) {
     return makeRegistry(selector, tagImplementation, nextAccumMakeMethods);
-  }
+  };
 
   return registry;
 }

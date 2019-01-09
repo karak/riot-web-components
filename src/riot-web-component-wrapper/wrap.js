@@ -1,5 +1,5 @@
-import { component as defineRiotComponent } from "riot";
-import { createInitialOpts, observeAttributes } from "./optsUtil";
+import { component as defineRiotComponent } from 'riot';
+import { createInitialOpts, observeAttributes } from './optsUtil';
 
 /**
  * Create the style node to inject into the shadow DOM
@@ -7,7 +7,7 @@ import { createInitialOpts, observeAttributes } from "./optsUtil";
  * @returns {HTMLElement} style DOM node
  */
 function createStyleNode(css) {
-  const style = document.createElement("style");
+  const style = document.createElement('style');
   style.textContent = css;
 
   return style;
@@ -29,15 +29,15 @@ export default function wrap(tagModule) {
 
       // create anonymous component
       const { css, template, tag } = tagImplementation;
-      this._tag = defineRiotComponent(
-        { css, template, ...tag },
-        { slots: undefined, attributes: {} }
-      );
+      this._tag = defineRiotComponent(Object.assign({ css, template }, tag), {
+        slots: undefined,
+        attributes: {}
+      });
 
       // TODO: expose some methods in _tag definitions
 
       // create shadowRoot
-      this.attachShadow({ mode: "open" });
+      this.attachShadow({ mode: 'open' });
       this.shadowRoot.attributes = []; // stub attributes, always empty, which Riot.Component required.
 
       // append CSS declaration node
