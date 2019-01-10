@@ -36,7 +36,7 @@
     "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {
-    "riot": "github:riot/riot#next",
+    "riot": "github:karak/riot#next",
     "kebab-case": "^1.0.0"
   }
 }
