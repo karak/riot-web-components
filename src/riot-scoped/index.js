@@ -3,17 +3,17 @@ import * as riot from 'riot';
 function decorate(tag, methods) {
   const onMounted0 = tag.onMounted;
   const onMounted1 = methods.onMounted;
-  const onBeforeUnmount0 = tag.onBeforeUnmount;
-  const onBeforeUnmount1 = methods.onBeforeUnmount;
+  const onBeforeDestroy0 = tag.onBeforeDestroy;
+  const onBeforeDestroy1 = methods.onBeforeDestroy;
 
   return Object.assign(tag, {
     onMounted: function() {
       if (onMounted0) onMounted0.apply(this, arguments);
       if (onMounted1) onMounted1.apply(this, arguments);
     },
-    onBeforeUnmount: function() {
-      if (onBeforeUnmount1) onBeforeUnmount1.apply(this, arguments);
-      if (onBeforeUnmount0) onBeforeUnmount0.apply(this, arguments);
+    onBeforeDestroy: function() {
+      if (onBeforeDestroy1) onBeforeDestroy1.apply(this, arguments);
+      if (onBeforeDestroy0) onBeforeDestroy0.apply(this, arguments);
     }
   });
 }
@@ -44,7 +44,7 @@ function makeRegistry(selector, tagImplementation, accumMakeMethods) {
   /**
    * make lifecycle methods mixin
    * @param {Array} tags tag storage
-   * @returns {{onMounted: onMounted, onBeforeUnmount: onBeforeUnmount}}
+   * @returns {{onMounted: onMounted, onBeforeDestroy: onBeforeDestroy}}
    */
   function makeMethods(tags) {
     return {
@@ -56,7 +56,7 @@ function makeRegistry(selector, tagImplementation, accumMakeMethods) {
         ]);
         tags.push(...newTags);
       },
-      onBeforeUnmount: function() {
+      onBeforeDestroy: function() {
         tags.forEach(x => x.unmount());
       }
     };

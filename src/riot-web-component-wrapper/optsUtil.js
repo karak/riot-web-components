@@ -12,22 +12,22 @@ function isWhite(localName) {
 }
 
 /**
- * create initial `opts` from current attributes of an element.
+ * create initial `props` from current attributes of an element.
  *
  * @param {NamedNodeMap} attributes
- * @returns {Object} mapped opts
+ * @returns {Object} mapped props
  */
-export function createInitialOpts(attributes) {
-  const opts = {};
+export function createInitialProps(attributes) {
+  const props = {};
   for (let i = 0; i < attributes.length; i += 1) {
     const attr = attributes.item(i);
     const { localName, value } = attr;
     if (!isWhite(localName)) {
-      const optName = kebabCase.reverse(localName);
-      opts[optName] = value;
+      const propName = kebabCase.reverse(localName);
+      props[propName] = value;
     }
   }
-  return opts;
+  return props;
 }
 
 /**
@@ -60,4 +60,34 @@ export function observeAttributes(el, callback) {
   return () => observer.disconnect();
 }
 
-// TODO: Convert camel case - snake case
+/*********************************************************/
+
+function bindValueAttribute(shadowRoot, host, name) {
+  Object.defineProperty(shadowRoot, name, {
+    get: function() {
+      return host[name];
+    }
+  });
+}
+
+function bindFunctionAttribute(shadowRoot, host, name) {
+  Object.defineProperty(shadowRoot, name, {
+    value: function() {
+      return host[name].apply(host, arguments);
+    }
+  });
+}
+
+/**
+ * add some proxy properties to shadowRoot for dom-bindings
+ *
+ * @param {ShadowRoot} shadowRoot target shadowRoot
+ */
+export function bindHostAttributes(shadowRoot) {
+  const host = shadowRoot.host;
+
+  bindValueAttribute(shadowRoot, host, 'attributes');
+  bindFunctionAttribute(shadowRoot, host, 'getAttribute');
+  bindFunctionAttribute(shadowRoot, host, 'setAttribute');
+
+}

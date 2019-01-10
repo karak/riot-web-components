@@ -1,7 +1,7 @@
 <x-hello message="">
   <!-- Note: Only the attributes defined above should be observed -->
   <span class="{isClicked ? 'clicked' : ''}">
-    {opts.message}
+    {props.message}
   </span>
   <p>
     <button onclick="{onClick}">Push me!</button>
