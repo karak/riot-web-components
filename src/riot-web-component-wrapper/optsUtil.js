@@ -89,5 +89,4 @@ export function bindHostAttributes(shadowRoot) {
   bindValueAttribute(shadowRoot, host, 'attributes');
   bindFunctionAttribute(shadowRoot, host, 'getAttribute');
   bindFunctionAttribute(shadowRoot, host, 'setAttribute');
-
 }
