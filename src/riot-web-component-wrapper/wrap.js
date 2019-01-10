@@ -1,5 +1,9 @@
 import { component as defineRiotComponent } from 'riot';
-import { createInitialOpts, observeAttributes } from './optsUtil';
+import {
+  createInitialProps,
+  observeAttributes,
+  bindHostAttributes
+} from './optsUtil';
 
 /**
  * Create the style node to inject into the shadow DOM
@@ -38,24 +42,21 @@ export default function wrap(tagModule) {
 
       // create shadowRoot
       this.attachShadow({ mode: 'open' });
-      this.shadowRoot.attributes = []; // stub attributes, always empty, which Riot.Component required.
+      bindHostAttributes(this.shadowRoot);
 
       // append CSS declaration node
       if (css) this.shadowRoot.appendChild(createStyleNode(css));
     }
 
     connectedCallback() {
-      const initialOpts = createInitialOpts(this.attributes);
+      const initialProps = createInitialProps(this.attributes);
 
       // mount
-      this._tag.opts = initialOpts;
-      this._tag.mount(this.shadowRoot);
-      // `this._tag.mount(this.shadowRoot, {}, initialOpts)` doesn't work with current compiler requiring 'opts'.
+      this._tag.mount(this.shadowRoot, {}, initialProps);
 
       // start sync opts with attributes
-      this._stopObserve = observeAttributes(this, newOpts => {
-        Object.assign(this._tag.opts, newOpts);
-        this._tag.update();
+      this._stopObserve = observeAttributes(this, newProps => {
+        this._tag.update({}, newProps);
       });
     }
 

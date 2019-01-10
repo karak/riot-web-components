@@ -1,6 +1,6 @@
 <kebab-case-test>
   <span>
-    {opts.textContent}
+    {props.textContent}
   </span>
   <style>
     :host {
@@ -12,8 +12,8 @@
 
     export default {
       onMounted() {
-        assert(this.root.host.attributes["text-content"].nodeValue === this.opts.textContent);
-        assert(this.root.querySelector("span").textContent === this.opts.textContent);
+        assert(this.root.host.attributes["text-content"].nodeValue === this.props.textContent);
+        assert(this.root.querySelector("span").textContent === this.props.textContent);
       }
     }
   </script>
