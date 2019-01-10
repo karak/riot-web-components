@@ -3,17 +3,17 @@ import * as riot from 'riot';
 function decorate(tag, methods) {
   const onMounted0 = tag.onMounted;
   const onMounted1 = methods.onMounted;
-  const onBeforeUnmount0 = tag.onBeforeUnmount;
-  const onBeforeUnmount1 = methods.onBeforeUnmount;
+  const onBeforeDestory0 = tag.onBeforeDestory;
+  const onBeforeDestory1 = methods.onBeforeDestory;
 
   return Object.assign(tag, {
     onMounted: function() {
       if (onMounted0) onMounted0.apply(this, arguments);
       if (onMounted1) onMounted1.apply(this, arguments);
     },
-    onBeforeUnmount: function() {
-      if (onBeforeUnmount1) onBeforeUnmount1.apply(this, arguments);
-      if (onBeforeUnmount0) onBeforeUnmount0.apply(this, arguments);
+    onBeforeDestory: function() {
+      if (onBeforeDestory1) onBeforeDestory1.apply(this, arguments);
+      if (onBeforeDestory0) onBeforeDestory0.apply(this, arguments);
     }
   });
 }
@@ -44,7 +44,7 @@ function makeRegistry(selector, tagImplementation, accumMakeMethods) {
   /**
    * make lifecycle methods mixin
    * @param {Array} tags tag storage
-   * @returns {{onMounted: onMounted, onBeforeUnmount: onBeforeUnmount}}
+   * @returns {{onMounted: onMounted, onBeforeDestory: onBeforeDestory}}
    */
   function makeMethods(tags) {
     return {
@@ -56,7 +56,7 @@ function makeRegistry(selector, tagImplementation, accumMakeMethods) {
         ]);
         tags.push(...newTags);
       },
-      onBeforeUnmount: function() {
+      onBeforeDestory: function() {
         tags.forEach(x => x.unmount());
       }
     };
