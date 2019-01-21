@@ -1,4 +1,5 @@
-import * as riot from 'riot';
+import { __ } from 'riot';
+const { createComponent } = __;
 
 function decorate(tag, methods) {
   const onMounted0 = tag.onMounted;
@@ -25,7 +26,7 @@ function decorate(tag, methods) {
  * @returns {function(HTMLElement=): Riot.TagInstance}
  */
 function mountBy(tagImplementation) {
-  return el => riot.component(tagImplementation).mount(el);
+  return el => createComponent(tagImplementation)({}).mount(el);
 }
 
 /**

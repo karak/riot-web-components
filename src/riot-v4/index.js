@@ -1,8 +1,6 @@
-import { component } from 'riot';
+import { __ } from 'riot';
+const { createComponent } = __;
 
-export function defineComponent({ css, template, tag }) {
-  return component(Object.assign({ css, template }, tag), {
-    slots: undefined,
-    attributes: {}
-  });
+export function defineComponent(options) {
+  return createComponent(options)({});
 }
