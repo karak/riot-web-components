@@ -1,4 +1,4 @@
-import { defineComponent } from '../src/riot-v4';
+import { component } from '../src/riot-v4';
 import wrap from '../src/riot-web-component-wrapper/wrap';
 import uuid from 'uuid';
 
@@ -12,7 +12,7 @@ export function withCustomTag(tagImplementation, callback) {
 
 export function withTag(tagImplementation, callback) {
   return withDom(root => {
-    const tag = defineComponent(tagImplementation);
+    const tag = component(tagImplementation);
     tag.mount(root); // BUG: onMounted() didn't called!?
     try {
       return callback(tag, root);

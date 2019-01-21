@@ -1,6 +1,7 @@
 import { __ } from 'riot';
-const { createComponent } = __;
+const { defineComponent } = __;
 
-export function defineComponent(options) {
-  return createComponent(options)({});
+export function component(tagImplementation, name) {
+  const { css, template, ...tag } = tagImplementation;
+  return defineComponent({ css, template, tag, name})({});
 }

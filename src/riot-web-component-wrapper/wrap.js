@@ -1,4 +1,4 @@
-import { defineComponent } from '../riot-v4';
+import { component } from '../riot-v4';
 import {
   createInitialProps,
   observeAttributes,
@@ -33,7 +33,7 @@ export default function wrap(tagModule) {
 
       // create anonymous component
       const { css } = tagImplementation;
-      this._tag = defineComponent(tagImplementation);
+      this._tag = component(tagImplementation);
 
       // TODO: expose some methods in _tag definitions
 
