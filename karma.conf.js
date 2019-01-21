@@ -7,8 +7,8 @@ module.exports = function(config) {
     files: ['test/**/*-test.js'],
     browsers: ['ChromeHeadless'],
     preprocessors: {
-      'src/*.js': ['webpack'],
-      'test/*.js': ['webpack']
+      'src/*.js': ['webpack', 'sourcemap'],
+      'test/*.js': ['webpack', 'sourcemap']
     },
     webpack: webpackConfig,
     logLevel: config.LOG_DEBUG
