@@ -17,7 +17,7 @@ export function withTag(tagImplementation, callback) {
     try {
       return callback(tag, root);
     } finally {
-      tag.unmount();
+      tag.unmount(true);
     }
   });
 }
