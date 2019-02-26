@@ -4,10 +4,12 @@
     </inner>
   </p>
   <script>
-    import * as riotScoped from '../../src/riot-scoped';
     import inner from './inner.riot';
 
-    export default riotScoped.register('inner', inner)({
-    });
+    export default {
+      components: {
+        inner,
+      }
+    };
   </script>
 </outer>
