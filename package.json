@@ -17,7 +17,7 @@
   "private": true,
   "devDependencies": {
     "@babel/core": "^7.2.2",
-    "@riotjs/compiler": "^4.0.0-alpha.6",
+    "@riotjs/compiler": "^4.0.0-alpha.20",
     "acorn": "^6.0.5",
     "babel-loader": "^8.0.4",
     "eslint": "^5.12.0",
@@ -30,7 +30,7 @@
     "karma-webpack": "^3.0.5",
     "prettier": "^1.15.3",
     "puppeteer": "^1.11.0",
-    "riot-compiler-loader": "^0.1.0",
+    "riot-compiler-loader": "^0.2.1",
     "uuid": "^3.3.2",
     "webpack": "^4.28.3",
     "webpack-cli": "^3.2.0",
@@ -38,6 +38,6 @@
   },
   "dependencies": {
     "kebab-case": "^1.0.0",
-    "riot": "github:karak/riot#next"
+    "riot": "^4.0.0-alpha.13"
   }
 }
