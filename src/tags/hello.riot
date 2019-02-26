@@ -13,7 +13,6 @@
     .clicked {
       font-weight: bold;
     }
-    /* doesn't work? */
   </style>
   <script>
     export default {
@@ -22,8 +21,8 @@
         console.log(this);
       },
       onClick() {
-        // BUG! this is not tag instance but an HTML element.
         this.isClicked = true;
+        this.update(); // it's required in current version.
       }
     };
   </script>

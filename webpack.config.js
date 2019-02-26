@@ -14,10 +14,23 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.riot$/,
+        test: /hello\.riot$/,
         loader: 'riot-compiler-loader',
         enforce: 'pre',
-        options: { hot: true }
+        options: {
+          // disable riot own ScopedCSS for Shadow DOM.
+          scopedCss: false,
+          hot: true
+        }
+      },
+      {
+        test: /\.riot$/,
+        exclude: /node_modules|hello.riot/,
+        loader: 'riot-compiler-loader',
+        enforce: 'pre',
+        options: {
+          hot: true
+        }
       },
       { test: /\.js$/, exclude: /node_modules/, use: 'babel-loader' }
     ]
